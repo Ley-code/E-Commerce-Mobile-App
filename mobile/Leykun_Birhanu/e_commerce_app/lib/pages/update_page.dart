@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:application1/components/button_styles.dart';
 import 'package:application1/components/text_style.dart';
 import 'package:application1/components/text_field.dart';
@@ -7,33 +5,23 @@ import 'package:application1/data/product.dart';
 import 'package:application1/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-class AddProudctPage extends StatefulWidget {
-  const AddProudctPage({
+class UpdatePage extends StatefulWidget {
+  final Product selectedProduct;
+  const UpdatePage({
     super.key,
+    required this.selectedProduct,
   });
 
   @override
-  State<AddProudctPage> createState() => _AddProudctPageState();
+  State<UpdatePage> createState() => _UpdatePageState();
 }
 
-class _AddProudctPageState extends State<AddProudctPage> {
-  File? _selectedImage;
+class _UpdatePageState extends State<UpdatePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-
-  Future _pickImageFromGallery() async {
-    final returnedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (returnedImage != null) {
-        _selectedImage = File(returnedImage.path);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,41 +46,36 @@ class _AddProudctPageState extends State<AddProudctPage> {
                   ),
                   const SizedBox(width: 80),
                   CustomTextStyle(
-                      name: "Add Product", weight: FontWeight.w500, size: 16),
+                      name: "Update Product",
+                      weight: FontWeight.w500,
+                      size: 16),
                 ],
               ),
               const SizedBox(height: 23),
-              GestureDetector(
-                onTap: () {
-                  _pickImageFromGallery();
-                },
-                child: Container(
-                  width: 366,
-                  height: 190,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: const Color.fromRGBO(243, 243, 243, 1),
+              Container(
+                width: 366,
+                height: 190,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: const Color.fromRGBO(243, 243, 243, 1),
+                ),
+                child: const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.image_outlined,
+                        size: 48,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      CustomTextStyle(
+                          name: "upload image",
+                          weight: FontWeight.w500,
+                          size: 14)
+                    ],
                   ),
-                  child: _selectedImage == null
-                      ? const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.image_outlined,
-                                size: 48,
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              CustomTextStyle(
-                                  name: "upload image",
-                                  weight: FontWeight.w500,
-                                  size: 14)
-                            ],
-                          ),
-                        )
-                      : Image.file(_selectedImage!),
                 ),
               ),
               const SizedBox(height: 16),
@@ -102,7 +85,10 @@ class _AddProudctPageState extends State<AddProudctPage> {
                 size: 14,
               ),
               const SizedBox(height: 8),
-              CustomTextField(controller: _nameController),
+              CustomTextField(
+                controller: _nameController,
+                hint: widget.selectedProduct.name,
+              ),
               const SizedBox(height: 16),
               const CustomTextStyle(
                 name: "category",
@@ -112,6 +98,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               const SizedBox(height: 8),
               CustomTextField(
                 controller: _categoryController,
+                hint: widget.selectedProduct.type,
               ),
               const SizedBox(height: 16),
               const CustomTextStyle(
@@ -123,6 +110,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               Stack(
                 children: [
                   CustomTextField(
+                    hint: widget.selectedProduct.price.toString(),
                     controller: _priceController,
                   ),
                   Positioned(
@@ -139,22 +127,22 @@ class _AddProudctPageState extends State<AddProudctPage> {
                 size: 14,
               ),
               const SizedBox(height: 8),
-              CustomTextField(lines: 5, controller: _descriptionController),
+              CustomTextField(
+                lines: 5,
+                controller: _descriptionController,
+                hint: widget.selectedProduct.description,
+              ),
               const SizedBox(height: 32),
               PrimaryButtonStyle(
                 pressed: () {
+                  widget.selectedProduct.name = _nameController.text;
+                  widget.selectedProduct.type = _categoryController.text;
+                  widget.selectedProduct.price = int.parse(_priceController.text);
+                  widget.selectedProduct.description = _descriptionController.text;
                   // Ensure that all required fields are filled
-                  products.add(Product(
-                    name: _nameController.text,
-                    image: _selectedImage!.path,
-                    description: _descriptionController.text,
-                    price: int.parse(_priceController.text),
-                    rating: 4,
-                    type: _categoryController.text,
-                  ));
                   Navigator.pushNamed(context, "/home_page");
                 },
-                name: "ADD",
+                name: "UPDATE",
                 width: double.infinity,
                 height: 50,
                 fgcolor: Color.fromRGBO(255, 255, 255, 1),
