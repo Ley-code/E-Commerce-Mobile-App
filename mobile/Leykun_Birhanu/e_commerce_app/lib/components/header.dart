@@ -2,6 +2,9 @@ import 'package:application1/components/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:application1/pages/product_search_page.dart';
 
+import '../animation/animation.dart';
+
+
 class HeaderView extends StatelessWidget {
   const HeaderView({super.key});
 
@@ -102,11 +105,8 @@ class HeaderView extends StatelessWidget {
                 icon: Icon(Icons.search,size: 24,),
                 color: Color.fromRGBO(221, 221, 221, 1), // Icon color
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return ProductSearchPage();
-                  }));
-                },
+                  Navigator.push(context, MyAnimation.createRoute(const ProductSearchPage()));
+                }
               ),
             ),
           ],

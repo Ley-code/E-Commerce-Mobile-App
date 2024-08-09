@@ -7,7 +7,7 @@ class PrimaryButtonStyle extends StatelessWidget {
   final Color fgcolor;
   final Color bgcolor;
   final String name;
-
+  final void Function()? pressed;
   const PrimaryButtonStyle({
     super.key,
     required this.width,
@@ -15,12 +15,13 @@ class PrimaryButtonStyle extends StatelessWidget {
     required this.name,
     required this.fgcolor,
     required this.bgcolor,
+    this.pressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: pressed,
       style: OutlinedButton.styleFrom(
           fixedSize: Size(width, height),
           foregroundColor: fgcolor, //const Color.fromARGB(230, 255, 19, 19),
