@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:application1/animation/animation.dart';
+import 'package:application1/functions/animation.dart';
 import 'package:application1/components/text_style.dart';
 import 'package:application1/pages/details_page.dart';
 import 'package:flutter/material.dart';

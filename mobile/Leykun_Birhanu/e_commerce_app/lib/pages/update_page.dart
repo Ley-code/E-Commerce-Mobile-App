@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:application1/components/button_styles.dart';
 import 'package:application1/components/text_style.dart';
 import 'package:application1/components/text_field.dart';
@@ -5,6 +7,7 @@ import 'package:application1/data/product.dart';
 import 'package:application1/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UpdatePage extends StatefulWidget {
   final Product selectedProduct;
@@ -18,10 +21,21 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
+
+  File? _selectedImage;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  Future _pickImageFromGallery() async {
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (returnedImage != null) {
+        _selectedImage = File(returnedImage.path);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,30 +66,35 @@ class _UpdatePageState extends State<UpdatePage> {
                 ],
               ),
               const SizedBox(height: 23),
-              Container(
-                width: 366,
-                height: 190,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: const Color.fromRGBO(243, 243, 243, 1),
-                ),
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.image_outlined,
-                        size: 48,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomTextStyle(
-                          name: "upload image",
-                          weight: FontWeight.w500,
-                          size: 14)
-                    ],
+              GestureDetector(
+                onTap: () {
+                  _pickImageFromGallery();
+                },
+                child: Container(
+                  width: 366,
+                  height: 190,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: const Color.fromRGBO(243, 243, 243, 1),
                   ),
+                  child: _selectedImage == null ? const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.image_outlined,
+                          size: 48,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        CustomTextStyle(
+                            name: "upload image",
+                            weight: FontWeight.w500,
+                            size: 14)
+                      ],
+                    ),
+                  ) : Image.file(_selectedImage!),
                 ),
               ),
               const SizedBox(height: 16),
@@ -139,6 +158,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   widget.selectedProduct.type = _categoryController.text;
                   widget.selectedProduct.price = int.parse(_priceController.text);
                   widget.selectedProduct.description = _descriptionController.text;
+                  widget.selectedProduct.image = _selectedImage!.path;
                   // Ensure that all required fields are filled
                   Navigator.pushNamed(context, "/home_page");
                 },

@@ -2,7 +2,7 @@ import 'package:application1/components/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:application1/pages/product_search_page.dart';
 
-import '../animation/animation.dart';
+import '../functions/animation.dart';
 
 
 class HeaderView extends StatelessWidget {
