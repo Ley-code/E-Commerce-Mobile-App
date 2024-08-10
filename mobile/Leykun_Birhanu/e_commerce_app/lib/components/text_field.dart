@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -8,7 +7,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     this.lines,
-    this.hint = "",
+    this.hint = '',
     required this.controller,
   });
 
@@ -20,7 +19,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: Color.fromARGB(255, 238, 238, 238),
+        fillColor: const Color.fromARGB(255, 238, 238, 238),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
             borderSide: BorderSide.none),

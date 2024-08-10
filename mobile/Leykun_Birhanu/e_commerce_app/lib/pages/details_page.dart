@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:application1/components/button_styles.dart';
-import 'package:application1/components/text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../components/button_styles.dart';
 import '../components/size_cards.dart';
+import '../components/text_style.dart';
 import '../data/product.dart';
 
+// ignore: must_be_immutable
 class DetailsPage extends StatefulWidget {
   Product selectedProduct;
 
@@ -68,24 +68,22 @@ class _DetailsPageState extends State<DetailsPage> {
                     name: widget.selectedProduct.type,
                     weight: FontWeight.w400,
                     size: 16,
-                    color: Color.fromRGBO(170, 170, 170, 1.0),
+                    color: const Color.fromRGBO(170, 170, 170, 1.0),
                   ),
-                  Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Color.fromRGBO(255, 215, 0, 1),
-                        ),
-                        CustomTextStyle(
-                          name: "${widget.selectedProduct.rating}",
-                          weight: FontWeight.w400,
-                          size: 16,
-                          color: Color.fromRGBO(170, 170, 170, 1.0),
-                          family: "Sora",
-                        ),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color.fromRGBO(255, 215, 0, 1),
+                      ),
+                      CustomTextStyle(
+                        name: '${widget.selectedProduct.rating}',
+                        weight: FontWeight.w400,
+                        size: 16,
+                        color: const Color.fromRGBO(170, 170, 170, 1.0),
+                        family: 'Sora',
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -102,7 +100,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     size: 24,
                   ),
                   CustomTextStyle(
-                    name: "\$${widget.selectedProduct.price}",
+                    name: '\$${widget.selectedProduct.price}',
                     weight: FontWeight.w500,
                     size: 16,
                   ),
@@ -113,12 +111,12 @@ class _DetailsPageState extends State<DetailsPage> {
             const Padding(
               padding: EdgeInsets.only(left: 32),
               child: CustomTextStyle(
-                name: "Size: ",
+                name: 'Size: ',
                 weight: FontWeight.w500,
                 size: 20,
               ),
             ),
-            Container(
+            SizedBox(
               width: 500,
               height: 60,
               child: ListView.builder(
@@ -132,7 +130,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       });
                     },
                     child:
-                        sizeCard(value: size - 39 == index, size: index + 39),
+                        SizeCards(value: size - 39 == index, size: index + 39),
                   );
                 },
               ),
@@ -144,8 +142,8 @@ class _DetailsPageState extends State<DetailsPage> {
               height: 260,
               child: Text(
                 widget.selectedProduct.description,
-                style: TextStyle(
-                  fontFamily: "Poppins",
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
@@ -162,27 +160,27 @@ class _DetailsPageState extends State<DetailsPage> {
                     children: [
                       PrimaryButtonStyle(
                         pressed: () {
-                          Navigator.of(context).pop("delete");
+                          Navigator.of(context).pop('delete');
                         },
-                        name: "DELETE",
+                        name: 'DELETE',
                         width: 152,
                         height: 50,
-                        fgcolor: Color.fromARGB(230, 255, 19, 19),
+                        fgcolor: const Color.fromARGB(230, 255, 19, 19),
                         bgcolor: Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       PrimaryButtonStyle(
                         pressed: () {
-                          Navigator.pushNamed(context, "/update_page",
+                          Navigator.pushNamed(context, '/update_page',
                               arguments: widget.selectedProduct);
                         },
-                        name: "UPDATE",
+                        name: 'UPDATE',
                         width: 152,
                         height: 50,
                         fgcolor: Colors.white,
-                        bgcolor: Color.fromRGBO(63, 81, 243, 1),
+                        bgcolor: const Color.fromRGBO(63, 81, 243, 1),
                       ),
                     ],
                   ),

@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:application1/functions/animation.dart';
-import 'package:application1/components/text_style.dart';
-import 'package:application1/pages/details_page.dart';
 import 'package:flutter/material.dart';
+
 import '../data/product.dart';
+import '../functions/animation.dart';
+import '../pages/details_page.dart';
+import 'text_style.dart';
 
 class MyCardBox extends StatefulWidget {
   final Product product;
@@ -25,10 +26,11 @@ class _MyCardBoxState extends State<MyCardBox> {
       onTap: () async {
         //-----------------------------------------------
         String confirmation = await Navigator.push(context, MyAnimation.createRoute(DetailsPage(selectedProduct: widget.product)));
-        if (confirmation == "delete") {
+        if (confirmation == 'delete') {
           
             products.remove(widget.product);
-            Navigator.pushNamed(context,"/home_page");   //refresh the page after deleting the product
+            // ignore: use_build_context_synchronously
+            Navigator.pushNamed(context,'/home_page');   //refresh the page after deleting the product
         }
         //Navigator.pushNamed(context, "/details_page", arguments: product);
         //-----------------------------------------------
@@ -43,7 +45,7 @@ class _MyCardBoxState extends State<MyCardBox> {
           ),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: 366,
                 height: 200,
                 child: ClipRRect(
@@ -53,7 +55,7 @@ class _MyCardBoxState extends State<MyCardBox> {
                     child: isFile ? Image.file(File(widget.product.image)) : Image.asset(widget.product.image, fit: BoxFit.cover)),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                 child: Column(
                   children: [
                     Row(
@@ -64,33 +66,31 @@ class _MyCardBoxState extends State<MyCardBox> {
                             weight: FontWeight.w500,
                             size: 20.0),
                         CustomTextStyle(
-                            name: "\$${widget.product.price}", weight: FontWeight.w500, size: 14),
+                            name: '\$${widget.product.price}', weight: FontWeight.w500, size: 14),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomTextStyle(
+                        const CustomTextStyle(
                           name: "Men's shoe",
                           weight: FontWeight.w400,
                           size: 12,
                           color: Color.fromRGBO(170, 170, 170, 1.0),
                         ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Color.fromRGBO(255, 215, 0, 1),
-                              ),
-                              CustomTextStyle(
-                                  name: "(${widget.product.rating})",
-                                  weight: FontWeight.w400,
-                                  size: 12,
-                                  color: Color.fromRGBO(170, 170, 170, 1.0),
-                                  family: "Sora"),
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Color.fromRGBO(255, 215, 0, 1),
+                            ),
+                            CustomTextStyle(
+                                name: '(${widget.product.rating})',
+                                weight: FontWeight.w400,
+                                size: 12,
+                                color: const Color.fromRGBO(170, 170, 170, 1.0),
+                                family: 'Sora'),
+                          ],
                         ),
                       ],
                     ),

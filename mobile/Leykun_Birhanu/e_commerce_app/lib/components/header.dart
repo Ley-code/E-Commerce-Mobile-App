@@ -1,8 +1,8 @@
-import 'package:application1/components/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:application1/pages/product_search_page.dart';
 
 import '../functions/animation.dart';
+import '../pages/product_search_page.dart';
+import 'text_style.dart';
 
 
 class HeaderView extends StatelessWidget {
@@ -11,13 +11,13 @@ class HeaderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Container(
+      SizedBox(
         width: 364,
         height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -26,25 +26,25 @@ class HeaderView extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
-                      color: Color.fromRGBO(204, 204, 204, 0.8),
+                      color: const Color.fromRGBO(204, 204, 204, 0.8),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextStyle(
-                        name: "July 14,2023",
+                        name: 'July 14,2023',
                         weight: FontWeight.w400,
                         size: 12,
-                        family: "Syne",
+                        family: 'Syne',
                         color: Color.fromRGBO(170, 170, 170, 1),
                       ),
                       Row(
                         children: [
-                          CustomTextStyle(name: "Hello, ", weight: FontWeight.w400, size: 15),
-                          CustomTextStyle(name: "Yohannes", weight: FontWeight.w600, size: 15),
+                          CustomTextStyle(name: 'Hello, ', weight: FontWeight.w400, size: 15),
+                          CustomTextStyle(name: 'Yohannes', weight: FontWeight.w600, size: 15),
                         ],
                       )
                     ],
@@ -57,7 +57,7 @@ class HeaderView extends StatelessWidget {
               height: 40,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color.fromRGBO(221, 221, 221, 1),
+                  color: const Color.fromRGBO(221, 221, 221, 1),
                   width: 1.0,
                 ),
                 borderRadius: BorderRadius.circular(9.0),
@@ -65,8 +65,8 @@ class HeaderView extends StatelessWidget {
               child: Stack(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.notifications_none_outlined),
-                    color: Color.fromRGBO(102, 102, 102, 1),
+                    icon: const Icon(Icons.notifications_none_outlined),
+                    color: const Color.fromRGBO(102, 102, 102, 1),
                     onPressed: () {},
                   ),
                   Positioned(
@@ -84,26 +84,26 @@ class HeaderView extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 38.0),
-      Container(
+      SizedBox(
         width: 364,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomTextStyle(
-                name: "Available Products", weight: FontWeight.w600, size: 24),
+            const CustomTextStyle(
+                name: 'Available Products', weight: FontWeight.w600, size: 24),
             Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color.fromRGBO(221, 221, 221, 1), // Border color
+                  color: const Color.fromRGBO(221, 221, 221, 1), // Border color
                   width: 1.0, // Border width
                 ),
                 borderRadius: BorderRadius.circular(9.0), // Border radius
               ),
               child: IconButton(
-                icon: Icon(Icons.search,size: 24,),
-                color: Color.fromRGBO(221, 221, 221, 1), // Icon color
+                icon: const Icon(Icons.search,size: 24,),
+                color: const Color.fromRGBO(221, 221, 221, 1), // Icon color
                 onPressed: () {
                   Navigator.push(context, MyAnimation.createRoute(const ProductSearchPage()));
                 }
