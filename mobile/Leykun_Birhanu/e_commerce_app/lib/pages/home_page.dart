@@ -1,9 +1,8 @@
-import 'package:application1/components/card_box_style.dart';
-import 'package:application1/components/header.dart';
-import 'package:application1/data/product.dart';
-import 'package:application1/pages/details_page.dart';
-import 'package:application1/pages/product_add_page.dart';
 import 'package:flutter/material.dart';
+
+import '../components/card_box_style.dart';
+import '../components/header.dart';
+import '../data/product.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,11 +20,11 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(12, 32, 12, 0),
               child: HeaderView(),
             ),
-            SizedBox(height: 22.0),
+            const SizedBox(height: 22.0),
             Expanded(
               child: ListView.builder(
                 itemCount: products.length,
@@ -47,13 +46,13 @@ class _HomeState extends State<Home> {
 
           },
           //-----------------------------------------------------------------
-          backgroundColor: Color.fromRGBO(63, 81, 243, 1),
+          backgroundColor: const Color.fromRGBO(63, 81, 243, 1),
+          shape: const CircleBorder(),
           child: const Icon(
             Icons.add,
             size: 36,
             color: Colors.white,
           ),
-          shape: const CircleBorder(),
         ),
       ),
     );

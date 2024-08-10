@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButtonStyle extends StatelessWidget {
@@ -33,7 +32,7 @@ class PrimaryButtonStyle extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           )),
-      child: Center(child: Text("$name")),
+      child: Center(child: Text(name)),
     );
   }
 }

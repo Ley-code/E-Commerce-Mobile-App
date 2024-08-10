@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CustomTextStyle extends StatelessWidget {
   final String name;
@@ -14,7 +12,7 @@ class CustomTextStyle extends StatelessWidget {
     required this.weight,
     required this.size,
     this.color = Colors.black,
-    this.family = "Poppins",
+    this.family = 'Poppins',
   });
 
   @override

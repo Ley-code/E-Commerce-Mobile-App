@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Rangewrapperwidget extends StatefulWidget {
@@ -12,6 +11,7 @@ class _RangewrapperwidgetState extends State<Rangewrapperwidget> {
   
   RangeValues _currentRangeValues = const RangeValues(300, 700);
   
+  @override
   Widget build(BuildContext context) {
     return RangeSlider(
       values: _currentRangeValues,

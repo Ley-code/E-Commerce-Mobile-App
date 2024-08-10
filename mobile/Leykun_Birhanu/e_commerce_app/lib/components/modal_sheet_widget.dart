@@ -1,8 +1,8 @@
-import 'package:application1/components/RangeWrapperWidget.dart';
-import 'package:application1/components/button_styles.dart';
-import 'package:application1/components/text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'button_styles.dart';
+import 'range_wrapper_widget.dart';
+import 'text_style.dart';
 
 class ModalSheetComponent extends StatefulWidget {
   const ModalSheetComponent({super.key});
@@ -20,7 +20,7 @@ class _ModalSheetComponentState extends State<ModalSheetComponent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextStyle(name: "Category",weight: FontWeight.w500,size: 16),
+          const CustomTextStyle(name: 'Category',weight: FontWeight.w500,size: 16),
           const SizedBox(height: 10),
           Container(
             width: double.infinity,
@@ -33,7 +33,7 @@ class _ModalSheetComponentState extends State<ModalSheetComponent> {
             ),
           ),
           const SizedBox(height: 16),
-          const CustomTextStyle(name: "Price",weight: FontWeight.w500,size: 16),
+          const CustomTextStyle(name: 'Price',weight: FontWeight.w500,size: 16),
           const SizedBox(height: 10),
           const Rangewrapperwidget(),
           const SizedBox(
@@ -42,7 +42,7 @@ class _ModalSheetComponentState extends State<ModalSheetComponent> {
           const PrimaryButtonStyle(
             width: double.infinity,
             height: 44,
-            name: "APPLY",
+            name: 'APPLY',
             fgcolor: Colors.white,
             bgcolor: Color.fromRGBO(63, 81, 243, 1),
           )

@@ -1,13 +1,12 @@
 import 'dart:io';
 
-import 'package:application1/components/button_styles.dart';
-import 'package:application1/components/text_style.dart';
-import 'package:application1/components/text_field.dart';
-import 'package:application1/data/product.dart';
-import 'package:application1/pages/home_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../components/button_styles.dart';
+import '../components/text_field.dart';
+import '../components/text_style.dart';
+import '../data/product.dart';
 
 class AddProudctPage extends StatefulWidget {
   const AddProudctPage({
@@ -57,8 +56,8 @@ class _AddProudctPageState extends State<AddProudctPage> {
                     ),
                   ),
                   const SizedBox(width: 80),
-                  CustomTextStyle(
-                      name: "Add Product", weight: FontWeight.w500, size: 16),
+                  const CustomTextStyle(
+                      name: 'Add Product', weight: FontWeight.w500, size: 16),
                 ],
               ),
               const SizedBox(height: 23),
@@ -82,11 +81,11 @@ class _AddProudctPageState extends State<AddProudctPage> {
                                 Icons.image_outlined,
                                 size: 48,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 16,
                               ),
                               CustomTextStyle(
-                                  name: "upload image",
+                                  name: 'upload image',
                                   weight: FontWeight.w500,
                                   size: 14)
                             ],
@@ -97,7 +96,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               ),
               const SizedBox(height: 16),
               const CustomTextStyle(
-                name: "name",
+                name: 'name',
                 weight: FontWeight.w500,
                 size: 14,
               ),
@@ -105,7 +104,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               CustomTextField(controller: _nameController),
               const SizedBox(height: 16),
               const CustomTextStyle(
-                name: "category",
+                name: 'category',
                 weight: FontWeight.w500,
                 size: 14,
               ),
@@ -115,7 +114,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               ),
               const SizedBox(height: 16),
               const CustomTextStyle(
-                name: "price",
+                name: 'price',
                 weight: FontWeight.w500,
                 size: 14,
               ),
@@ -125,7 +124,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
                   CustomTextField(
                     controller: _priceController,
                   ),
-                  Positioned(
+                  const Positioned(
                     left: 290,
                     top: 16,
                     child: Icon(Icons.attach_money),
@@ -134,7 +133,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
               ),
               const SizedBox(height: 16),
               const CustomTextStyle(
-                name: "description",
+                name: 'description',
                 weight: FontWeight.w500,
                 size: 14,
               ),
@@ -152,18 +151,18 @@ class _AddProudctPageState extends State<AddProudctPage> {
                     rating: 4,
                     type: _categoryController.text,
                   ));
-                  Navigator.pushNamed(context, "/home_page");
+                  Navigator.pushNamed(context, '/home_page');
                 },
-                name: "ADD",
+                name: 'ADD',
                 width: double.infinity,
                 height: 50,
-                fgcolor: Color.fromRGBO(255, 255, 255, 1),
-                bgcolor: Color.fromRGBO(63, 81, 243, 1),
+                fgcolor: const Color.fromRGBO(255, 255, 255, 1),
+                bgcolor: const Color.fromRGBO(63, 81, 243, 1),
               ),
               const SizedBox(height: 16),
               const PrimaryButtonStyle(
                 pressed: null,
-                name: "DELETE",
+                name: 'DELETE',
                 width: double.infinity,
                 height: 50,
                 fgcolor: Color.fromARGB(230, 255, 19, 19),

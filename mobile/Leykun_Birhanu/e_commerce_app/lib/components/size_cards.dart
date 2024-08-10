@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class sizeCard extends StatelessWidget {
+class SizeCards extends StatelessWidget {
   final bool value;
   final int size;
-  const sizeCard({super.key, required this.value, required this.size});
+  const SizeCards({super.key, required this.value, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class sizeCard extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "${size}",
+            '$size',
             style: TextStyle(
-              fontFamily: "Poppins",
+              fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
               fontSize: 20,
               color: value ? Colors.white : null,

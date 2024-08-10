@@ -1,10 +1,9 @@
-import 'package:application1/components/card_box_style.dart';
-import 'package:application1/components/ModalSheetWidget.dart';
-import 'package:application1/components/text_style.dart';
-import 'package:application1/data/product.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import '../components/card_box_style.dart';
+import '../components/modal_sheet_widget.dart';
+import '../components/text_style.dart';
+import '../data/product.dart';
 
 class ProductSearchPage extends StatefulWidget {
   const ProductSearchPage({super.key});
@@ -35,7 +34,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                 ),
                 const SizedBox(width: 60),
                 const CustomTextStyle(
-                  name: "Search Product",
+                  name: 'Search Product',
                   weight: FontWeight.w500,
                   size: 16,
                 ),
@@ -52,7 +51,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                       children: [
                         TextField(
                           decoration: InputDecoration(
-                            hintText: "Leather",
+                            hintText: 'Leather',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color.fromRGBO(217, 217, 217, 1),
@@ -85,7 +84,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return ModalSheetComponent();
+                          return const ModalSheetComponent();
                         },
                       );
                     },
