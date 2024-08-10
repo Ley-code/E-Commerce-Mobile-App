@@ -7,7 +7,7 @@ This Flutter-based e-commerce app enables users to effortlessly manage their pro
 - **CRUD Operations:** Users can create, view, update, and delete products in the app.
 - **Navigation and Routing:** The app employs named routes to facilitate easy and organized navigation between different screens. This structured approach ensures that moving between various parts of the app is straightforward and consistent.
 - **Smooth Transitions:** Custom page transition animations have been integrated to elevate the user experience, offering smooth and visually engaging transitions between screens.
-- 
+  
 ## Screenshots
 ![Home Screen](assets/home_page.png)
 
