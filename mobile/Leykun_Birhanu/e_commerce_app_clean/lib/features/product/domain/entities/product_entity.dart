@@ -6,7 +6,7 @@ class ProductEntity extends Equatable {
   final String description;
   final String category;
   final int rating;
-  final double price;
+  final int price;
   final String imageUrl;
 
   const ProductEntity({
