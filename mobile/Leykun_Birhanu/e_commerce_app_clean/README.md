@@ -1,16 +1,23 @@
-# e_commerce_app_clean
+# E_commerce_app_Clean
 
-A new Flutter project.
+a replica of the E_commerce_app but done with clean architecture and Test Driven Development.
 
-## Getting Started
+## table_of_contents
+1. [Project Details](#project-overview)
+3. [Features](#features)
+    -[CRUD operations on Product](#CRUD-operations-on-Product)
+       - [Domain Layer](#domain-layer)
+       - [Data Layer](#data-layer)
+       - [Presentation Layer](#presentation-layer)
 
-This project is a starting point for a Flutter application.
+4. [Installation](#installation)
+7. [Contributing](#contributing)
+8. [License](#license)
 
-A few resources to get you started if this is your first Flutter project:
+## Project Overview
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+This project adheres to test-driven development and clean architecture, and it is designed to manage products.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Architecture
+ - ### Domain Layer
+   **Use cases**:  
