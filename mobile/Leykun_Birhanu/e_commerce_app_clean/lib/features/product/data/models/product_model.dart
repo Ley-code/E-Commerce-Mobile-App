@@ -24,11 +24,24 @@ class ProductModel extends ProductEntity {
     return {
       'id': id,
       'name': name,
-      'description':description,
-      'price':price,
-      'imageUrl':imageUrl,
-      'category':category,
-      'rating':rating,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'category': category,
+      'rating': rating,
     };
+  }
+
+  ProductEntity toProductEntity() => ProductEntity(
+        id: id,
+        name: name,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+        category: category,
+        rating: rating,
+      );
+  static List<ProductEntity> toProductListEntity(List<ProductModel> model) {
+    return model.map((product) => product.toProductEntity()).toList();
   }
 }
