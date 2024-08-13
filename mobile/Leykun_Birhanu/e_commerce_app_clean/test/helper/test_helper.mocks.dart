@@ -485,8 +485,8 @@ class MockSharedPreferences extends _i1.Mock implements _i12.SharedPreferences {
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClinet extends _i1.Mock implements _i4.Client {
-  MockHttpClinet() {
+class MockHttpClient extends _i1.Mock implements _i4.Client {
+  MockHttpClient() {
     _i1.throwOnMissingStub(this);
   }
 

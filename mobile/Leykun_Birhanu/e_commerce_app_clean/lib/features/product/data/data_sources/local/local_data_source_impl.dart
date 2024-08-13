@@ -13,6 +13,7 @@ class ProductLocalDataSourceImpl extends ProductLocalDataSource {
   final CACHE_PRODUCTS_KEY = 'PRODUCTS';
   ProductLocalDataSourceImpl({required this.sharedPreferences});
 
+  
   @override
   Future<bool> cacheProducts(List<ProductModel> products) {
 

@@ -23,8 +23,7 @@ void main() {
     price: 100,
     description: 'Description 1',
     imageUrl: 'image1.jpg',
-    rating: 4,
-    category: 'Category 1',
+   
   );
 
   test(

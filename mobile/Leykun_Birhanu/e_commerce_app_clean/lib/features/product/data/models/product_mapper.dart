@@ -9,8 +9,6 @@ extension ProductMapper on ProductEntity {
       description: description,
       price: price,
       imageUrl: imageUrl,
-      category: category,
-      rating: rating,
     );
   }
 }

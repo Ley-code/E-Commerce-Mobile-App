@@ -1,4 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'features/product/data/data_sources/remote/remote_data_source_impl.dart';
+import 'features/product/data/models/product_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -116,7 +121,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          // ignore: unnecessary_nullable_for_final_variable_declarations
+          final http.Client client = http.Client();
+          RemoteDataSourceImpl remoteDataSourceImpl =
+              RemoteDataSourceImpl(client: client);
+          remoteDataSourceImpl.addProduct(const ProductModel(
+              id: '2',
+              name: 'bowser',
+              description: 'hello',
+              price: 124,
+              imageUrl: 'https//ww/image.com',
+));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
