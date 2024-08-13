@@ -5,6 +5,7 @@ import 'package:application1/features/product/data/data_sources/remote/remote_da
 import 'package:application1/features/product/domain/repository/product_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @GenerateMocks(
   [
@@ -12,6 +13,7 @@ import 'package:mockito/annotations.dart';
     ProductRemoteDataSource,
     ProductLocalDataSource,
     NetworkInfo,
+    SharedPreferences,
   ],
   
   
