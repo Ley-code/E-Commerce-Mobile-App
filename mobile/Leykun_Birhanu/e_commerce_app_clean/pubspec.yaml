@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  internet_connection_checker: ^1.0.0+1
   http: ^0.13.3
   equatable: ^2.0.3
   dartz: ^0.10.0
