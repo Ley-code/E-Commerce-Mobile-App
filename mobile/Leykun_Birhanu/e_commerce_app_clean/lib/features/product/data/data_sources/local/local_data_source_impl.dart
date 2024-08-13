@@ -12,13 +12,11 @@ class ProductLocalDataSourceImpl extends ProductLocalDataSource {
   // ignore: non_constant_identifier_names
   final CACHE_PRODUCTS_KEY = 'PRODUCTS';
   ProductLocalDataSourceImpl({required this.sharedPreferences});
-  
+
   @override
   Future<bool> cacheProducts(List<ProductModel> products) {
-    final List<Map<String, dynamic>> productsJson = products.map((product) {
-      return product.toJson();
-    }).toList();
-    final String jsonString = jsonEncode(productsJson);
+
+    final String jsonString = jsonEncode(products); // JsonEncode converts the proudcts to json if they have .toJson() method implicitliy
     return sharedPreferences.setString(CACHE_PRODUCTS_KEY, jsonString);
   }
 
