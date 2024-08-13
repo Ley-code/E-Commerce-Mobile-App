@@ -1,6 +1,5 @@
 import 'package:application1/core/error/exception.dart';
 import 'package:application1/core/error/failure.dart';
-import 'package:application1/core/network/network_info.dart';
 import 'package:application1/features/product/data/models/product_model.dart';
 import 'package:application1/features/product/data/repositories/product_repository_impl.dart';
 import 'package:application1/features/product/domain/entities/product_entity.dart';
@@ -32,8 +31,6 @@ void main() {
     description: 'something you wear',
     price: 566,
     imageUrl: 'https://www.google.com',
-    category: 'men\'s shoes',
-    rating: 3,
   );
   const tProductEntity = ProductEntity(
     id: '3',
@@ -41,8 +38,6 @@ void main() {
     description: 'something you wear',
     price: 566,
     imageUrl: 'https://www.google.com',
-    category: 'men\'s shoes',
-    rating: 3,
   );
 
   String id = '3';

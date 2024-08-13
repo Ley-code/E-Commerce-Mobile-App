@@ -25,8 +25,6 @@ void main() {
       description: 'something you wear',
       price: 566,
       imageUrl: 'https://www.google.com',
-      category: "men's shoes",
-      rating: 3,
     ),
     const ProductModel(
       id: '4',
@@ -34,8 +32,6 @@ void main() {
       description: 'what you wear',
       price: 536,
       imageUrl: 'pininterest.com',
-      category: "men's shoes",
-      rating: 5,
     )
   ];
 

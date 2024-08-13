@@ -7,8 +7,6 @@ class ProductModel extends ProductEntity {
     required super.description,
     required super.price,
     required super.imageUrl,
-    required super.category,
-    required super.rating,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -17,8 +15,8 @@ class ProductModel extends ProductEntity {
         description: json['description'],
         price: json['price'],
         imageUrl: json['imageUrl'],
-        category: json['category'],
-        rating: json['rating'],
+        // category: json['category'],
+        // rating: json['rating'],
       );
   Map<String, dynamic> toJson() {
     return {
@@ -27,8 +25,8 @@ class ProductModel extends ProductEntity {
       'description': description,
       'price': price,
       'imageUrl': imageUrl,
-      'category': category,
-      'rating': rating,
+      // 'category': category,
+      // 'rating': rating,
     };
   }
 
@@ -38,8 +36,6 @@ class ProductModel extends ProductEntity {
         description: description,
         price: price,
         imageUrl: imageUrl,
-        category: category,
-        rating: rating,
       );
   static List<ProductEntity> toProductListEntity(List<ProductModel> model) {
     return model.map((product) => product.toProductEntity()).toList();

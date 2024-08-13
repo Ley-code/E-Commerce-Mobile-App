@@ -16,8 +16,6 @@ void main() {
   });
 
   const tProductEntity =  ProductEntity(
-    category: 'male',
-    rating: 3,
     id: '3',
     name: 'airjordan',
     description: 'something you wear',

@@ -13,8 +13,6 @@ void main() {
     description: 'something you wear',
     price: 566,
     imageUrl: 'https://www.google.com',
-    category: 'men\'s shoes',
-    rating: 3,
   );
 
   test(
@@ -46,8 +44,6 @@ void main() {
       'description': 'something you wear',
       'price': 566,
       'imageUrl': 'https://www.google.com',
-      'category': 'men\'s shoes',
-      'rating': 3,
     };
     //act
     final result = tProductModel.toJson();

@@ -17,6 +17,6 @@ import 'package:shared_preferences/shared_preferences.dart';
   ],
   
   
-  customMocks: [MockSpec<http.Client>(as: #MockHttpClinet)]
+  customMocks: [MockSpec<http.Client>(as: #MockHttpClient)]
 )
 void main() {}
