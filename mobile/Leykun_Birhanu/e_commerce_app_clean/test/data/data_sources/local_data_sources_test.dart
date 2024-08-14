@@ -34,14 +34,14 @@ void main() {
       imageUrl: 'pininterest.com',
     )
   ];
-
+  const String cacheProductsPath = 'helper/dummy_data/dummy_cached_products.json';
   group('get products from cache', () {
     test(
       'Should get products from shared preferences',
       () async {
         // arrange
         when(mockSharedPreferences.getString('PRODUCTS')).thenReturn(
-            readJson('helper/dummy_data/dummy_cached_products.json'));
+            readJson(cacheProductsPath));
         // act
         final result = await productLocalDataSourceImpl.getProducts();
         // assert
