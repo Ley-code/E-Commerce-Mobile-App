@@ -14,7 +14,7 @@ void main() {
     price: 566,
     imageUrl: 'https://www.google.com',
   );
-
+  const String productModelPath = 'helper/dummy_data/dummy_product_response.json';
   test(
     'should extend from the product entity',
     () async {
@@ -28,7 +28,7 @@ void main() {
     () async {
       //arrange
       final Map<String, dynamic> jsonMap = json
-          .decode(readJson('helper\\dummy_data\\dummy_product_response.json'));
+          .decode(readJson(productModelPath));
       //act
       final result = ProductModel.fromJson(jsonMap);
       //assert

@@ -12,15 +12,26 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
-    final response = await client.post(
-      Uri.parse(Urls.addProduct),
-      body: product.toJson(),
+    var request = http.MultipartRequest('POST', Uri.parse(Urls.addProduct));
+    request.fields['name'] = product.name;
+    request.fields['description'] = product.description;
+    request.fields['price'] = product.price.toString();
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'imageUrl',
+        product.imageUrl,
+      ),
     );
-    if (response.statusCode == 201) {
-      return ProductModel.fromJson(json.decode(response.body)['data']);
+    
+    http.StreamedResponse response = await request.send();
+    
+    if(response.statusCode == 201){
+      final jsonString = await response.stream.bytesToString();
+      return ProductModel.fromJson(json.decode(jsonString)['data']);
     } else {
       throw ServerException();
     }
+
   }
 
   @override
