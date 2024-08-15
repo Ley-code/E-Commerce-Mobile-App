@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'features/product/data/data_sources/remote/remote_data_source_impl.dart';
 import 'features/product/data/models/product_model.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -127,12 +128,12 @@ class _MyHomePageState extends State<MyHomePage> {
           RemoteDataSourceImpl remoteDataSourceImpl =
               RemoteDataSourceImpl(client: client);
           remoteDataSourceImpl.addProduct(const ProductModel(
-              id: '2',
-              name: 'bowser',
-              description: 'hello',
-              price: 124,
-              imageUrl: 'https//ww/image.com',
-));
+            id: '2',
+            name: 'bowser',
+            description: 'hello',
+            price: 124,
+            imageUrl: 'https//ww/image.com',
+          ));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
