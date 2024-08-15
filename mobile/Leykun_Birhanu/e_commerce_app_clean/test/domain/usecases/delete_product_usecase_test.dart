@@ -5,26 +5,25 @@ import 'package:mockito/mockito.dart';
 
 import '../../helper/test_helper.mocks.dart';
 
-void main(){
-
+void main() {
   late MockProductRepository mockProductRepository;
   late DeleteProductUsecase deleteProductUsecase;
-  
-  setUp((){
+
+  setUp(() {
     mockProductRepository = MockProductRepository();
     deleteProductUsecase = DeleteProductUsecase(mockProductRepository);
   });
-
+  const String id = '3';
   test(
     'should delete Product from ProductRepository and return a bool',
     () async {
       // Arrange
-      when(mockProductRepository.deleteProduct('3'))
+      when(mockProductRepository.deleteProduct(id))
           .thenAnswer((_) async => const Right(true));
-      
+
       // Act
-      final result = await deleteProductUsecase.execute('3');
-      
+      final result = await deleteProductUsecase(const DeleteParams(id: id));
+
       // Assert
       expect(result, const Right(true));
     },

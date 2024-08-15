@@ -18,7 +18,7 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
     request.fields['price'] = product.price.toString();
     request.files.add(
       await http.MultipartFile.fromPath(
-        'imageUrl',
+        'image',
         product.imageUrl,
       ),
     );

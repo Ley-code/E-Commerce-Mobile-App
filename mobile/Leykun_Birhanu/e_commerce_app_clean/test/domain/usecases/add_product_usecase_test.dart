@@ -29,7 +29,7 @@ void main() {
           .thenAnswer((_) async => const Right(tProductEntity));
       
       // Act
-      final result = await addProductUsecase.execute(tProductEntity);
+      final result = await addProductUsecase(const CreateParams(product: tProductEntity));
       
       // Assert
       expect(result, const Right(tProductEntity));

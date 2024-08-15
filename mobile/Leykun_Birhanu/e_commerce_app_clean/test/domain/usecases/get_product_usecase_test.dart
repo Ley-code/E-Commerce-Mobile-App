@@ -34,7 +34,7 @@ void main() {
           .thenAnswer((_) async => const Right(tProductEntity));
       
       // Act
-      final result = await getProductUsecase.execute(tProductEntity.id);
+      final result = await getProductUsecase(GetParams(id: tProductEntity.id));
       
       // Assert
       expect(result, const Right(tProductEntity));

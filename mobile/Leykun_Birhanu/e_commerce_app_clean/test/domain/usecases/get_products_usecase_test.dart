@@ -1,4 +1,5 @@
 
+import 'package:application1/core/usecase/usecase.dart';
 import 'package:application1/features/product/domain/entities/product_entity.dart';
 import 'package:application1/features/product/domain/usecases/get_products_usecase.dart';
 import 'package:dartz/dartz.dart';
@@ -39,7 +40,7 @@ void main() {
       when(mockProductRepository.getProducts())
           .thenAnswer((getProductsUsecase) async =>const Right(tProductEntity));
       //act
-      final result = await getProductsUsecase.execute();
+      final result = await getProductsUsecase(NoParams());
       //assert
       expect(result, const Right(tProductEntity));
     },
