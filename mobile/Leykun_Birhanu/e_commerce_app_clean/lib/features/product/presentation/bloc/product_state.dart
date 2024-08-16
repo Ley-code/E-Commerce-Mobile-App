@@ -31,6 +31,7 @@ class LoadedAllProductState extends ProductState {
 
 class ProductErrorState extends ProductState {
   final String message;
+  
 
   const ProductErrorState(this.message);
 

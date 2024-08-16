@@ -44,6 +44,7 @@ class ProductRepositoryImpl implements ProductRepository {
         final result = await remoteDataSource.deleteProduct(id);
         return Right(result);
       } on ServerException {
+
         return const Left(ServerFailure('An error has occurred'));
       } on SocketException {
         return const Left(ConnectionFailure('No internet connection'));
@@ -104,6 +105,7 @@ class ProductRepositoryImpl implements ProductRepository {
             await remoteDataSource.updateProduct(product.toProductModel());
         return Right(result.toProductEntity());
       } on ServerException {
+        
         return const Left(ServerFailure('An error has occurred'));
       } on SocketException {
         return const Left(ConnectionFailure('No internet connection'));
