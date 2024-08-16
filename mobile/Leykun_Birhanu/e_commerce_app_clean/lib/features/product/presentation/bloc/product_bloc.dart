@@ -25,7 +25,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     required this.deleteProductUsecase,
     required this.updateProductUsecase,
   }) : super(ProductInitial()) {
-    
     on<LoadAllProductEvent>((event, emit) async {
       emit(ProductLoading());
 
@@ -54,35 +53,33 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         final result = await deleteProductUsecase(DeleteParams(id: event.id));
 
         result.fold(
-          (failure) => emit(ProductErrorState(failure.message)),
-          (value) =>
-              emit(const ProductDeletedState('Successfully Deleted Product')),
-        );
+            (failure) => emit(ProductErrorState(failure.message)),
+            (value) => emit(
+                const ProductDeletedState('Successfully Deleted Product')));
       },
     );
 
-    on<UpdateProductEvent>(
-      (event, emit) async {
-        emit(ProductLoading());
-        final result = await updateProductUsecase(UpdateParams(product: event.product));
-
-        result.fold(
-          (failure) => emit(ProductErrorState(failure.message)),
-          (product) => emit(ProductUpdatedState(event.product)),
-        );
-
+    on<UpdateProductEvent>((event, emit) async {
+      emit(ProductLoading());
+      final result =
+          await updateProductUsecase(UpdateParams(product: event.product));
+      result.fold(
+        (failure) => emit(ProductErrorState(failure.message)),
+        (product) => emit(ProductUpdatedState(event.product)),
+      );
     });
     on<CreateProductEvent>(
       (event, emit) async {
         emit(ProductLoading());
 
-        final result = await addProductUsecase(CreateParams(product: event.product));
+        final result =
+            await addProductUsecase(CreateParams(product: event.product));
 
         result.fold(
           (failure) => emit(ProductErrorState(failure.message)),
           (product) => emit(ProductCreatedState(event.product)),
         );
       },
-    );  
+    );
   }
 }

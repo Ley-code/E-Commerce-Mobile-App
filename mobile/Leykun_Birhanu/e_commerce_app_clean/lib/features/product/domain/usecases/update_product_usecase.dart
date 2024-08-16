@@ -13,16 +13,16 @@ class UpdateProductUsecase implements UseCase<ProductEntity, UpdateParams> {
 
   @override
   Future<Either<Failure, ProductEntity>> call(UpdateParams params) async {
+   
     return await repository.updateProduct(params.product);
   }
 }
-class UpdateParams extends Equatable{
+
+class UpdateParams extends Equatable {
   final ProductEntity product;
 
   const UpdateParams({required this.product});
-  
+
   @override
   List<Object?> get props => [product];
-
-
 }

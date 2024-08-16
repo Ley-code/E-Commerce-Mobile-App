@@ -15,12 +15,11 @@ class DeleteProductUsecase implements UseCase<bool, DeleteParams> {
     return await repository.deleteProduct(params.id);
   }
 }
-class DeleteParams extends Equatable{
+
+class DeleteParams extends Equatable {
   final String id;
-  
+
   const DeleteParams({required this.id});
   @override
   List<Object?> get props => [id];
-
 }
-

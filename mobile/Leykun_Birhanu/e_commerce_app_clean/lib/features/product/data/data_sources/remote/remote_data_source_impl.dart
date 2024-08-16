@@ -1,5 +1,9 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
+
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/exception.dart';
 import '../../models/product_model.dart';
@@ -17,27 +21,22 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
     request.fields['description'] = product.description;
     request.fields['price'] = product.price.toString();
     request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        product.imageUrl,
-      ),
+      await http.MultipartFile.fromPath('image', product.imageUrl,
+          contentType: MediaType('image', 'jpg')),
     );
-    
+
     http.StreamedResponse response = await request.send();
-    
-    if(response.statusCode == 201){
+    if (response.statusCode == 201) {
       final jsonString = await response.stream.bytesToString();
       return ProductModel.fromJson(json.decode(jsonString)['data']);
     } else {
       throw ServerException();
     }
-
   }
 
   @override
   Future<bool> deleteProduct(String id) async {
     final response = await client.delete(Uri.parse(Urls.deleteProductId(id)));
-
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -72,9 +71,16 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
     final response = await client.put(
-        Uri.parse(Urls.updateProductId(product.id)),
-        body: product.toJson());
-
+      Uri.parse(Urls.updateProductId(product.id)),
+      body: jsonEncode({
+        'name': product.name,
+        'description': product.description,
+        'price': product.price,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
     if (response.statusCode == 200) {
       return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {
