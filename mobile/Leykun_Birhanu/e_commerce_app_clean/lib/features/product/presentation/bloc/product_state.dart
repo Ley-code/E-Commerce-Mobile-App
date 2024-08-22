@@ -31,7 +31,6 @@ class LoadedAllProductState extends ProductState {
 
 class ProductErrorState extends ProductState {
   final String message;
-  
 
   const ProductErrorState(this.message);
 
@@ -41,20 +40,21 @@ class ProductErrorState extends ProductState {
 
 class ProductDeletedState extends ProductState {
   final String message;
-  const ProductDeletedState(this.message);
+  const ProductDeletedState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
-class ProductUpdatedState extends ProductState{
+
+class ProductUpdatedState extends ProductState {
   final ProductEntity product;
   const ProductUpdatedState(this.product);
 
   @override
   List<Object> get props => [product];
-  
 }
-class ProductCreatedState extends ProductState{
+
+class ProductCreatedState extends ProductState {
   final ProductEntity product;
   const ProductCreatedState(this.product);
 

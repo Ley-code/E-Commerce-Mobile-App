@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'button_styles.dart';
-import 'range_wrapper_widget.dart';
-import 'text_style.dart';
+import 'styles/custom_button.dart';
+import 'styles/range_wrapper_widget.dart';
+import 'styles/text_style.dart';
 
 class ModalSheetComponent extends StatefulWidget {
   const ModalSheetComponent({super.key});
@@ -36,15 +36,14 @@ class _ModalSheetComponentState extends State<ModalSheetComponent> {
           const CustomTextStyle(name: 'Price',weight: FontWeight.w500,size: 16),
           const SizedBox(height: 10),
           const Rangewrapperwidget(),
-          const SizedBox(
-            height: 56,
-          ),
-          const PrimaryButtonStyle(
+          const SizedBox(height: 20,),
+          CustomButton(
             width: double.infinity,
             height: 44,
             name: 'APPLY',
-            fgcolor: Colors.white,
-            bgcolor: Color.fromRGBO(63, 81, 243, 1),
+            textBgColor: Colors.white,
+            fgcolor: Theme.of(context).primaryColor,
+            bgcolor: Theme.of(context).primaryColor,
           )
         ],
       ),

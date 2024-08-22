@@ -6,17 +6,22 @@ import 'package:http_parser/http_parser.dart';
 
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/exception.dart';
+import '../../../../authentication/data/data_sources/local/local_data_source.dart';
 import '../../models/product_model.dart';
 import 'remote_data_source.dart';
 
 class RemoteDataSourceImpl implements ProductRemoteDataSource {
   final http.Client client;
-
-  RemoteDataSourceImpl({required this.client});
+  final AuthLocalDataSource authLocalDataSource;
+  RemoteDataSourceImpl(
+      {required this.authLocalDataSource, required this.client});
 
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
-    var request = http.MultipartRequest('POST', Uri.parse(Urls.addProduct));
+    String token = await authLocalDataSource.getToken();
+
+    var request = http.MultipartRequest('POST', Uri.parse(Urls2.addProduct));
+    request.headers['Authorization'] = 'Bearer $token';
     request.fields['name'] = product.name;
     request.fields['description'] = product.description;
     request.fields['price'] = product.price.toString();
@@ -36,7 +41,13 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<bool> deleteProduct(String id) async {
-    final response = await client.delete(Uri.parse(Urls.deleteProductId(id)));
+    String token = await authLocalDataSource.getToken();
+
+    final response =
+        await client.delete(Uri.parse(Urls2.deleteProductId(id)), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -46,7 +57,13 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> getProduct(String id) async {
-    final response = await client.get(Uri.parse(Urls.getProductId(id)));
+    String token = await authLocalDataSource.getToken();
+
+    final response =
+        await client.get(Uri.parse(Urls2.getProductId(id)), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
     if (response.statusCode == 200) {
       return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {
@@ -56,7 +73,11 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> getProducts() async {
-    final response = await client.get(Uri.parse(Urls.getProducts));
+    String token = await authLocalDataSource.getToken();
+    final response = await client.get(Uri.parse(Urls2.getProducts), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
 
     List<dynamic> jsonDecoded = jsonDecode(response.body)['data'];
     final products =
@@ -70,17 +91,19 @@ class RemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-    final response = await client.put(
-      Uri.parse(Urls.updateProductId(product.id)),
-      body: jsonEncode({
-        'name': product.name,
-        'description': product.description,
-        'price': product.price,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
+    String token = await authLocalDataSource.getToken();
+
+    final response =
+        await client.put(Uri.parse(Urls2.updateProductId(product.id)),
+            body: jsonEncode({
+              'name': product.name,
+              'description': product.description,
+              'price': product.price,
+            }),
+            headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
     if (response.statusCode == 200) {
       return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {

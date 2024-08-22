@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/product_entity.dart';
 import '../bloc/product_bloc.dart';
-import '../widgets/components/button_styles.dart';
-import '../widgets/components/text_field.dart';
-import '../widgets/components/text_style.dart';
+import '../widgets/components/styles/custom_button.dart';
+import '../widgets/components/styles/text_field_styles.dart';
+import '../widgets/components/styles/text_style.dart';
 
 // ignore: must_be_immutable
 class UpdatePage extends StatefulWidget {
@@ -173,7 +173,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   hint: widget.selectedProduct.description,
                 ),
                 const SizedBox(height: 32),
-                PrimaryButtonStyle(
+                CustomButton(
                   pressed: () {
                     ProductEntity updateProduct = ProductEntity(
                       description: _descriptionController.text,
@@ -185,7 +185,7 @@ class _UpdatePageState extends State<UpdatePage> {
                     
                     context
                         .read<ProductBloc>()
-                        .add(UpdateProductEvent(updateProduct));
+                        .add(UpdateProductEvent(product:  updateProduct));
                   },
                   name: 'UPDATE',
                   width: double.infinity,
@@ -194,7 +194,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   bgcolor: const Color.fromRGBO(63, 81, 243, 1),
                 ),
                 const SizedBox(height: 16),
-                const PrimaryButtonStyle(
+                const CustomButton(
                   pressed: null,
                   name: 'DELETE',
                   width: double.infinity,
