@@ -4,6 +4,17 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/network_info.dart';
+import 'features/authentication/data/data_sources/local/local_data_source.dart';
+import 'features/authentication/data/data_sources/local/local_data_source_impl.dart';
+import 'features/authentication/data/data_sources/remote/auth_remote_data_source.dart';
+import 'features/authentication/data/data_sources/remote/auth_remote_datasource_impl.dart';
+import 'features/authentication/data/repositories/auth_repo_impl.dart';
+import 'features/authentication/domain/repositories/auth_repo.dart';
+import 'features/authentication/domain/usecases/get_current_user_usecase.dart';
+import 'features/authentication/domain/usecases/log_in_usecase.dart';
+import 'features/authentication/domain/usecases/log_out_usecase.dart';
+import 'features/authentication/domain/usecases/sign_up_usecase.dart';
+import 'features/authentication/presentation/bloc/auth_bloc.dart';
 import 'features/product/data/data_sources/local/local_data_source.dart';
 import 'features/product/data/data_sources/local/local_data_source_impl.dart';
 import 'features/product/data/data_sources/remote/remote_data_source.dart';
@@ -49,7 +60,7 @@ Future<void> init() async {
   //data sources
 
   sl.registerLazySingleton<ProductRemoteDataSource>(
-    () => RemoteDataSourceImpl(client: sl()),
+    () => RemoteDataSourceImpl(client: sl(), authLocalDataSource: sl()),
   );
 
   sl.registerLazySingleton<ProductLocalDataSource>(
@@ -66,4 +77,33 @@ Future<void> init() async {
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker());
+
+  //feature: Authentication
+  //bloc
+  sl.registerFactory(
+    () => AuthBloc(
+      getCurrentUserUsecase: sl(),
+      logInUsecase: sl(),
+      logOutUsecase: sl(),
+      signUpUsecase: sl(),
+    ),
+  );
+  //usecases
+  sl.registerLazySingleton(() => GetCurrentUserUsecase(authRepository: sl()));
+  sl.registerLazySingleton(() => LogInUsecase(authRepository: sl()));
+  sl.registerLazySingleton(() => SignUpUsecase(authRepository: sl()));
+  sl.registerLazySingleton(() => LogOutUsecase(authRepository: sl()));
+  //repositories
+
+  sl.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(authRemoteDataSource: sl()));
+
+  //data sources
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDatasourceImpl(
+        client: sl(),
+        authLocalDataSource: sl(),
+      ));
+  sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(
+        sharedPreferences: sl(),
+      ));
 }

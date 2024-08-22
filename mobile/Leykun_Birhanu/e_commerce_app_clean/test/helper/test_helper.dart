@@ -1,5 +1,9 @@
 
 import 'package:application1/core/network/network_info.dart';
+import 'package:application1/features/authentication/data/data_sources/local/local_data_source.dart';
+import 'package:application1/features/authentication/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:application1/features/authentication/domain/repositories/auth_repo.dart';
+import 'package:application1/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:application1/features/product/data/data_sources/local/local_data_source.dart';
 import 'package:application1/features/product/data/data_sources/remote/remote_data_source.dart';
 import 'package:application1/features/product/domain/repository/product_repository.dart';
@@ -24,6 +28,10 @@ import 'package:shared_preferences/shared_preferences.dart';
     AddProductUsecase,
     UpdateProductUsecase,
     DeleteProductUsecase,
+    AuthLocalDataSource,
+    AuthBloc,
+    AuthRepository,
+    AuthRemoteDataSource,
   ],
   
   

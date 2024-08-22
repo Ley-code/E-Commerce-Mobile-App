@@ -13,7 +13,7 @@ class SizeCards extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: value ? const Color.fromRGBO(63, 81, 243, 1) : null,
+          color: value ? const Color.fromRGBO(63, 81, 243, 1) : Colors.white,
         ),
         child: Center(
           child: Text(
@@ -22,7 +22,7 @@ class SizeCards extends StatelessWidget {
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
               fontSize: 20,
-              color: value ? Colors.white : null,
+              color: value ? Colors.white : Colors.black,
             ),
           ),
         ),

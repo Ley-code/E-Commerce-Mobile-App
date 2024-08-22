@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../injection_container.dart';
 import '../bloc/product_bloc.dart';
-import '../widgets/components/card_box_style.dart';
 import '../widgets/components/modal_sheet_widget.dart';
-import '../widgets/components/text_style.dart';
+import '../widgets/components/product_card.dart';
+import '../widgets/components/styles/text_style.dart';
 
 class ProductSearchPage extends StatefulWidget {
   const ProductSearchPage({super.key});
@@ -31,9 +31,9 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(
+                    icon:  Icon(
                       Icons.arrow_back_ios_rounded,
-                      color: Color.fromRGBO(63, 81, 243, 1),
+                      color: Theme.of(context).primaryColor
                     ),
                   ),
                   const SizedBox(width: 60),
@@ -48,12 +48,12 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    const SizedBox(
+                   SizedBox(
                       width: 270,
                       height: 48,
                       child: Stack(
                         children: [
-                          TextField(
+                          const TextField(
                             decoration: InputDecoration(
                               hintText: 'Leather',
                               enabledBorder: OutlineInputBorder(
@@ -74,7 +74,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                                 onPressed: null,
                                 icon: Icon(
                                   Icons.arrow_forward,
-                                  color: Color.fromRGBO(63, 81, 243, 1),
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               )),
                         ],
@@ -96,7 +96,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(63, 81, 243, 1),
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(

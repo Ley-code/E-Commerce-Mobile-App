@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../functions/animation.dart';
-import '../../pages/product_search_page.dart';
-import 'text_style.dart';
-
+import '../../../../authentication/presentation/bloc/auth_bloc.dart';
+import 'styles/text_style.dart';
 
 class HeaderView extends StatelessWidget {
   const HeaderView({super.key});
@@ -12,7 +11,7 @@ class HeaderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       SizedBox(
-        width: 364,
+        width: MediaQuery.of(context).size.width,
         height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,66 +25,127 @@ class HeaderView extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
-                      color: const Color.fromRGBO(204, 204, 204, 0.8),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   const SizedBox(width: 10),
-                  const Column(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextStyle(
+                      const CustomTextStyle(
                         name: 'July 14,2023',
                         weight: FontWeight.w400,
                         size: 12,
                         family: 'Syne',
                         color: Color.fromRGBO(170, 170, 170, 1),
                       ),
-                      Row(
-                        children: [
-                          CustomTextStyle(name: 'Hello, ', weight: FontWeight.w400, size: 15),
-                          CustomTextStyle(name: 'Yohannes', weight: FontWeight.w600, size: 15),
-                        ],
+                      BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          if (state is AuthUserLoaded) {
+                            // final String name = state.userEntity.name;
+                            return Row(
+                              children: [
+                                const CustomTextStyle(
+                                    name: 'Hello, ',
+                                    weight: FontWeight.w400,
+                                    size: 15),
+                                CustomTextStyle(
+                                    name: state.userEntity.name,
+                                    weight: FontWeight.w600,
+                                    size: 15),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
                       )
                     ],
                   )
                 ],
               ),
             ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromRGBO(221, 221, 221, 1),
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(9.0),
-              ),
-              child: Stack(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.notifications_none_outlined),
-                    color: const Color.fromRGBO(102, 102, 102, 1),
-                    onPressed: () {},
+            Row(children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color.fromRGBO(221, 221, 221, 1),
+                    width: 1.0,
                   ),
-                  Positioned(
-                      left: 20,
-                      top: 12,
-                      child: Icon(
-                        Icons.circle,
-                        size: 8,
-                        color: Colors.blue[800],
-                      ))
-                ],
+                  borderRadius: BorderRadius.circular(9.0),
+                ),
+                child: Stack(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none_outlined),
+                      color: const Color.fromRGBO(102, 102, 102, 1),
+                      onPressed: () {},
+                    ),
+                    Positioned(
+                        left: 20,
+                        top: 12,
+                        child: Icon(
+                          Icons.circle,
+                          size: 8,
+                          color: Colors.blue[800],
+                        ))
+                  ],
+                ),
               ),
-            ),
+              const SizedBox(width: 10,),
+              SizedBox(
+                width: 42,
+                height: 42,
+                child: Material(
+                  color: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: IconButton(
+                    iconSize: 20,
+                    color: Colors.white,
+                    icon: const Icon(Icons.logout),
+                    onPressed: () {
+                      // Handle logout logic here
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Logout'),
+                          content: const Text('Are you sure you want to logout?'),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.read<AuthBloc>().add(LogOutEvent());
+                                Navigator.popAndPushNamed(context, '/sign_in_page');
+                              },
+                              child: const Text('Logout'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ]),
           ],
         ),
       ),
       const SizedBox(height: 38.0),
       SizedBox(
-        width: 364,
+        width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -102,12 +162,17 @@ class HeaderView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(9.0), // Border radius
               ),
               child: IconButton(
-                icon: const Icon(Icons.search,size: 24,),
-                color: const Color.fromRGBO(221, 221, 221, 1), // Icon color
-                onPressed: () {
-                  Navigator.push(context, MyAnimation.createRoute(const ProductSearchPage()));
-                }
-              ),
+                  icon: const Icon(
+                    Icons.search,
+                    size: 24,
+                  ),
+                  color: const Color.fromRGBO(221, 221, 221, 1), // Icon color
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/product_search_page',
+                    );
+                  }),
             ),
           ],
         ),

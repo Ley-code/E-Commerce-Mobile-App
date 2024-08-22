@@ -25,8 +25,6 @@ class ProductModel extends ProductEntity {
       'description': description,
       'price': price.toString(),
       'imageUrl': imageUrl,
-      // 'category': category,
-      // 'rating': rating,
     };
   }
 

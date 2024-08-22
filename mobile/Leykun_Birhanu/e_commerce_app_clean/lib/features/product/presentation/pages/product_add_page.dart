@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/product_entity.dart';
 import '../bloc/product_bloc.dart';
-import '../widgets/components/button_styles.dart';
-import '../widgets/components/text_field.dart';
-import '../widgets/components/text_style.dart';
+import '../widgets/components/styles/custom_button.dart';
+import '../widgets/components/styles/text_field_styles.dart';
+import '../widgets/components/styles/text_style.dart';
 
 class AddProudctPage extends StatefulWidget {
   const AddProudctPage({
@@ -42,6 +42,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
       body: BlocConsumer<ProductBloc, ProductState>(
         listener: (context, state) {
           if (state is ProductCreatedState) {
+            context.read<ProductBloc>().add(LoadAllProductEvent());
             Navigator.pushNamed(context, '/home_page');
           } else if (state is ProductErrorState) {
             ScaffoldMessenger.of(context)
@@ -67,9 +68,9 @@ class _AddProudctPageState extends State<AddProudctPage> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.arrow_back_ios_rounded,
-                            color: Color.fromRGBO(63, 81, 243, 1),
+                            color: Theme.of(context).primaryColor
                           ),
                         ),
                         const SizedBox(width: 80),
@@ -160,7 +161,7 @@ class _AddProudctPageState extends State<AddProudctPage> {
                     CustomTextField(
                         lines: 5, controller: _descriptionController),
                     const SizedBox(height: 32),
-                    PrimaryButtonStyle(
+                    CustomButton(
                       pressed: () {
                         // Ensure that all required fields are filled
                         ProductEntity newProduct = ProductEntity(
@@ -172,22 +173,24 @@ class _AddProudctPageState extends State<AddProudctPage> {
                         );
                         context
                             .read<ProductBloc>()
-                            .add(CreateProductEvent(newProduct));
+                            .add(CreateProductEvent(product:  newProduct));
                       },
                       name: 'ADD',
                       width: double.infinity,
                       height: 50,
-                      fgcolor: const Color.fromRGBO(255, 255, 255, 1),
-                      bgcolor: const Color.fromRGBO(63, 81, 243, 1),
+                      textBgColor: Colors.white,
+                      fgcolor: Theme.of(context).primaryColor,
+                      bgcolor: Theme.of(context).primaryColor
                     ),
                     const SizedBox(height: 16),
-                    const PrimaryButtonStyle(
+                    CustomButton(
                       pressed: null,
                       name: 'DELETE',
                       width: double.infinity,
                       height: 50,
-                      fgcolor: Color.fromARGB(230, 255, 19, 19),
-                      bgcolor: Color.fromRGBO(255, 255, 255, 1),
+                      textBgColor: Theme.of(context).secondaryHeaderColor,
+                      fgcolor: Theme.of(context).secondaryHeaderColor,
+                      bgcolor: Colors.white ,
                     ),
                   ],
                 ),

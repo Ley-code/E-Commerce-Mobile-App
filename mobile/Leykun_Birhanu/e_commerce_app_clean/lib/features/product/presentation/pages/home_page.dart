@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../injection_container.dart';
+import '../../../authentication/presentation/bloc/auth_bloc.dart';
 import '../bloc/product_bloc.dart';
-import '../widgets/components/card_box_style.dart';
 import '../widgets/components/header.dart';
+import '../widgets/components/product_card.dart';
+import '../widgets/components/styles/snack_bar_style.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   State<Home> createState() => _HomeState();
 }
@@ -16,20 +16,27 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    context.read<ProductBloc>().add(LoadAllProductEvent());
+    context.read<AuthBloc>().add(GetCurrentUserEvent());
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => sl<ProductBloc>()..add(LoadAllProductEvent()),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(12, 32, 12, 0),
-                child: HeaderView(),
-              ),
-              const SizedBox(height: 22.0),
-              Expanded(
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(12, 32, 12, 0),
+              child: HeaderView(),
+            ),
+            const SizedBox(height: 22.0),
+            Expanded(
+              child: BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
+                 if (state is AuthErrorState) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(customSnackBar(state.message,  Theme.of(context).secondaryHeaderColor));
+                  }
+                },
                 child: BlocBuilder<ProductBloc, ProductState>(
                   builder: (context, state) {
                     if (state is ProductLoading) {
@@ -40,11 +47,14 @@ class _HomeState extends State<Home> {
                     if (state is LoadedAllProductState) {
                       return RefreshIndicator(
                         onRefresh: () async {
-                          context.read<ProductBloc>().add(LoadAllProductEvent());
+                          context
+                              .read<ProductBloc>()
+                              .add(LoadAllProductEvent());
                         },
                         child: ListView.builder(
                           itemCount: state.products.length,
                           itemBuilder: (context, index) {
+                            
                             return MyCardBox(product: state.products[index]);
                           },
                         ),
@@ -59,8 +69,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: SizedBox(
@@ -72,7 +82,7 @@ class _HomeState extends State<Home> {
             Navigator.pushNamed(context, '/product_add_page');
           },
           //-----------------------------------------------------------------
-          backgroundColor: const Color.fromRGBO(63, 81, 243, 1),
+          backgroundColor: Theme.of(context).primaryColor,
           shape: const CircleBorder(),
           child: const Icon(
             Icons.add,
